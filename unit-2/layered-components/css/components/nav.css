@@ -1,0 +1,127 @@
+/* Navigation component: .site-nav and its links
+   Style the active link using aria-current. */
+
+/* TODO: Style the navigation */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(13, 17, 23, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: var(--border);
+  padding: 0 var(--space-lg);
+}
+ 
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  gap: var(--space-md);
+}
+ 
+/* Brand / logo */
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+ 
+/* Cyan bracket accent */
+&::before {
+    content: '[';
+    color: var(--color-primary);
+  }
+ 
+&::after {
+    content: ']';
+    color: var(--color-primary);
+  }
+ 
+&:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 4px;
+    border-radius: var(--radius-sm);
+  }
+}
+ 
+/* Nav links list */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  list-style: none;
+}
+ 
+/* Individual nav link */
+.nav-link {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.45em 0.9em;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: color var(--transition-fast),
+              border-color var(--transition-fast),
+              background-color var(--transition-fast);
+  position: relative;
+ 
+&:hover:not([aria-current="page"]) {
+    color: var(--color-text);
+    border-color: var(--color-border);
+    background-color: var(--color-surface);
+  }
+ 
+/* Active / current page link */
+&[aria-current="page"] {
+    color: var(--color-primary);
+    border-color: rgba(0, 212, 200, 0.3);
+    background-color: rgba(0, 212, 200, 0.06);
+  }
+ 
+/* :not() — all nav links that are NOT current should show hover */
+&:not([aria-current="page"]):focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    color: var(--color-text);
+  }
+ 
+/* Focus-visible on current page link */
+&:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+ 
+/* Mobile */
+@media (max-width: 640px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background-color: var(--color-surface);
+    border-bottom: var(--border);
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-sm);
+ 
+&.is-open {
+      display: flex;
+    }
+  }
+}

@@ -1,0 +1,124 @@
+/* Card components: .card-group, .cards grid, .card, .card-tag, .card-footer
+   Use native nesting. Reference tokens with var(). */
+
+/* TODO: Style the card components */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: clamp(var(--space-md), 3vw, var(--space-lg));
+}
+ 
+/* Individual card */
+.card {
+  background-color: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-md);
+  padding: clamp(var(--space-md), 2.5vw, var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-normal),
+              box-shadow var(--transition-normal),
+              transform var(--transition-normal);
+ 
+/* Subtle top accent line */
+&::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-primary), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+ 
+&:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow), var(--shadow-md);
+    transform: translateY(-3px);
+ 
+&::before {
+      opacity: 1;
+    }
+  }
+ 
+/* Card image */
+& .card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+    border: var(--border);
+  }
+ 
+/* Card header area */
+& .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+ 
+/* Card title */
+& .card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    line-height: var(--line-height-tight);
+  }
+ 
+/* Card body text */
+& .card-body {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-loose);
+    flex: 1;
+  }
+ 
+/* Card badge / tag */
+& .card-tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    background-color: rgba(0, 212, 200, 0.08);
+    border: 1px solid rgba(0, 212, 200, 0.2);
+    border-radius: var(--radius-pill);
+    padding: 0.2em 0.75em;
+    width: fit-content;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+ 
+/* Card footer - pushes to bottom of flex column */
+& .card-footer {
+    margin-top: auto;
+    padding-top: var(--space-md);
+    border-top: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+}
+ 
+/* Featured card */
+.card-featured {
+  grid-column: 1 / -1;
+ 
+  @media (min-width: 640px) {
+    grid-column: span 2;
+    flex-direction: row;
+    align-items: center;
+ 
+    & .card-image {
+      flex-shrink: 0;
+      width: 40%;
+      aspect-ratio: 4 / 3;
+    }
+  }
+}

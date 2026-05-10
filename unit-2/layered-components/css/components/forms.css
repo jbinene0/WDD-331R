@@ -1,0 +1,162 @@
+/* Form components: .note-form, .form-field, inputs, textarea, select
+   Use native nesting. Add :focus-visible styles to all inputs. */
+
+/* TODO: Style the form components */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 560px;
+}
+ 
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+ 
+/* Label */
+label {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+ 
+
+:is(input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="url"],
+    textarea,
+    select) {
+  width: 100%;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 0.65em 1em;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast),
+              background-color var(--transition-fast);
+  appearance: none;
+  -webkit-appearance: none;
+ 
+&::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+ 
+&:hover:not(:disabled) {
+    border-color: var(--color-text-muted);
+    background-color: var(--color-surface-elevated);
+  }
+ 
+/* Focus-visible */
+&:focus-visible {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 200, 0.2);
+    background-color: var(--color-surface-elevated);
+  }
+ 
+&:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+ 
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: var(--line-height-normal);
+}
+ 
+/* Custom select arrow */
+select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300d4c8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1em center;
+  padding-right: 2.5em;
+}
+ 
+/* Form error state */
+.form-group:has(input:invalid:not(:placeholder-shown)) {
+& label {
+    color: var(--color-danger);
+  }
+ 
+& input {
+    border-color: var(--color-danger);
+  }
+}
+ 
+/* Error message text */
+.form-error {
+  font-size: var(--text-xs);
+  color: var(--color-danger);
+  font-family: var(--font-mono);
+}
+ 
+/* Helper / hint text */
+.form-hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+ 
+/* Checkbox and radio - :not() usage: style unchecked inputs differently */
+:is(input[type="checkbox"], input[type="radio"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.1em;
+  height: 1.1em;
+  border: var(--border-width) var(--border-style) var(--color-border);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+  transition: border-color var(--transition-fast),
+              background-color var(--transition-fast);
+  flex-shrink: 0;
+ 
+&:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+ 
+&::after {
+      content: '';
+      width: 0.45em;
+      height: 0.45em;
+      background-color: var(--color-bg);
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    }
+  }
+ 
+&:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+ 
+/* :not() - unchecked radio should be fully round */
+&:not(:checked)[type="radio"] {
+    border-radius: 50%;
+  }
+}
+ 
+.checkbox-label,
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}

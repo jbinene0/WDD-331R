@@ -1,0 +1,52 @@
+/* Non-color tokens: spacing, typography, borders, shadows.
+   These values should be referenced by every other layer. */
+
+:root {
+/* Spacing */
+  --space-sm:  0.5rem;   
+  --space-md:  1.25rem;  
+  --space-lg:  2.5rem;   
+  --space-xl:  5rem;     
+
+/* Typography */
+  --font-display: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-body:    'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.25rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  clamp(1.75rem, 3vw, 2.5rem);
+  --text-3xl:  clamp(2rem, 5vw, 3.5rem);
+
+  --line-height-tight:  1.25;
+  --line-height-normal: 1.6;
+  --line-height-loose:  1.8;
+
+  --font-weight-normal:  400;
+  --font-weight-medium:  500;
+  --font-weight-bold:    700;
+
+/* Shape */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   16px;
+  --radius-pill: 999px;
+
+/* Borders */
+  --border-width: 1px;
+  --border-style: solid;
+  --border:       var(--border-width) var(--border-style) var(--color-border);
+
+/* Motion */
+  --transition-fast:   150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow:   400ms ease;
+
+/* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(0, 212, 200, 0.15);
+}
